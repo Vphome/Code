@@ -1,0 +1,71 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ChestInteract : MonoBehaviour
+{
+    public GameObject InteractText;
+    public KeyCode e;
+    private bool isTouching = false;
+    private bool Opened = false;
+    public GameObject ChestOpened;
+    public GameObject ChestClosed;
+    public Animator animator;
+    public Transform Player;
+    public GameObject FrontChest;
+    public GameObject FrontChest2;
+
+    void Update()
+    {
+        if(isTouching && Input.GetKeyDown(e))
+        {
+            ChestClosed.SetActive(false);
+            ChestOpened.SetActive(true);
+            InteractText.SetActive(false);
+            animator.SetFloat("Active", 0);
+            Opened = true;
+        }
+        if (Opened)
+        {
+            FrontChest.SetActive(false);
+            if (Player.position.y >= 12.9f)
+            {
+                FrontChest2.SetActive(true);
+            }
+            else
+            {
+                FrontChest2.SetActive(false);
+            }
+        }
+        else
+        {
+            if (Player.position.y >= 12.9f)
+            {
+                FrontChest.SetActive(true);
+            }
+            else
+            {
+                FrontChest.SetActive(false);
+            }
+        }
+    }
+
+    void OnTriggerEnter2D()
+    {
+        if (!Opened)
+        {
+            isTouching = true;
+            InteractText.SetActive(true);
+            animator.SetFloat("Active", 1);
+        }
+    }
+    void OnTriggerExit2D()
+    {
+        if (!Opened)
+        {
+            isTouching = false;
+            InteractText.SetActive(false);
+            animator.SetFloat("Active", 0);
+        }
+    }
+}
