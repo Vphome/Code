@@ -1,0 +1,58 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FollowPlayer : MonoBehaviour
+{
+    public Transform Player;
+    public GameObject player;
+
+    void Update()
+    {
+        //NORMAL
+        if(Player.position.x >= -12.55f && Player.position.y <= 26.2f && Player.position.x <= 12f && Player.position.y >= -5.4f)
+        {
+            transform.position = new Vector3(Player.position.x, Player.position.y, transform.position.z);
+        }      
+        //LEFT-WALL
+        if(Player.position.x <= -12.55f && Player.position.y <= 26.2f && Player.position.y >= -5.4f)
+        {
+            transform.position = new Vector3(transform.position.x, Player.position.y, transform.position.z);
+        }
+        //UP-WALL
+        if(Player.position.y >= -12.55f && Player.position.y >= 26.2f)
+        {
+            transform.position = new Vector3(Player.position.x, transform.position.y, transform.position.z);
+        }
+        //DOWN-WALL
+        if(Player.position.y <= -5.4 && Player.position.x >= -12.55f && Player.position.x <= 12f)
+        {
+            transform.position = new Vector3(Player.position.x, transform.position.y, transform.position.z);
+        }
+        //RIGHT-WALL
+        if(Player.position.x >= 12f && Player.position.y <= 26.2f && Player.position.y >= -5.4f)
+        {
+            transform.position = new Vector3(transform.position.x, Player.position.y, transform.position.z);
+        }
+        // LEFT-UP
+        if (Player.position.x <= -12.55f && Player.position.y >= 26.2f)
+        {
+            transform.position = new Vector3(-12.55f, 26.2f, transform.position.z);
+        }
+        // RIGHT-UP
+        if (Player.position.x >= 12f && Player.position.y >= 26.2f)
+        {
+            transform.position = new Vector3(12f, 26.2f, transform.position.z);
+        }
+        //RIGHT-DOWN
+        if (Player.position.x >= 12f && Player.position.y <= -5.4f)
+        {
+            transform.position = new Vector3(12f, -5.4f, transform.position.z);
+        }
+        //LEFT-DOWN
+        if (Player.position.x <= -12.55f && Player.position.y <= -5.4f)
+        {
+            transform.position = new Vector3(-12.55f, -5.4f, transform.position.z);
+        }
+    }
+}
